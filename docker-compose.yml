@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  n8n:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: n8n-puppeteer-p3
+    ports:
+      - "5681:5678"
+    environment:
+      - WEBHOOK_URL=http://localhost:5681
+      - N8N_CUSTOM_EXTENSIONS=/opt/n8n-custom-nodes
+      - PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+      - PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+    volumes:
+      - n8n_data_p3:/home/node/.n8n
+
+volumes:
+  n8n_data_p3:
